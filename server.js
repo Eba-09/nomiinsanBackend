@@ -22,7 +22,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(errorHandler);
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.use('/uploads', express.static('uploads'));
 app.use(morgan('combined',{stream:accesLogStream}))
 app.use('/api/lib/author', authorRouter);
 app.use('/api/lib/durem', duremRouter);
@@ -32,6 +33,10 @@ app.use('/api/lib/category',categoryRouter);
 app.use('/api/lib/book',bookRouter);
 app.use('/api/lib/zahialga', zahialgaRouter);
 app.use('/api/lib/zeel', zeelRouter);
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
 const server = app.listen(
     process.env.PORT,
     console.log(`express server ${process.env.PORT}`)
