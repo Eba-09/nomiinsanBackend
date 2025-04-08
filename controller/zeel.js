@@ -12,6 +12,7 @@ exports.getZeels = asyncHandler(async(req,res,next)=>{
         data: zeels
     })
 });
+
 exports.getZeel = asyncHandler(async(req,res,next)=>{
     const zeel = await Zeel.findById(req.params.id)
         if(!zeel){
@@ -25,6 +26,17 @@ exports.getZeel = asyncHandler(async(req,res,next)=>{
 //tuhain 1 userin zeeluud
 exports.getUserZeels = asyncHandler(async(req,res,next)=>{
     const zeels = await Zeel.find({userCode: req.params.userCodeId}).populate("nomCode").populate("sanchCode")
+        if(!zeels){
+            throw new Error(req.params.id + 'ID tai hereglegch baihgui baina',400);
+        }
+        res.status(200).json({
+            success: true,
+            count: zeels.length,
+            data: zeels
+        })
+});
+exports.getBookZeel = asyncHandler(async(req,res,next)=>{
+    const zeels = await Zeel.find({nomCode: req.params.nomCodeId}).populate("nomCode").populate("sanchCode").populate("userCode");
         if(!zeels){
             throw new Error(req.params.id + 'ID tai hereglegch baihgui baina',400);
         }

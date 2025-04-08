@@ -66,7 +66,6 @@ exports.createBook = asyncHandler(async (req, res, next) => {
 
         // Зургийн зам
         const photoPath = `/uploads/${req.file.filename}`;
-
         const bookData = {
             name,
             photo: photoPath,
@@ -83,14 +82,10 @@ exports.createBook = asyncHandler(async (req, res, next) => {
             category,
             createUser
         };
-
         const newBook = new Book(bookData);
         await newBook.save();
-
         console.log('Ном амжилттай хадгалагдлаа:', newBook);
-
         return res.status(201).json({ message: 'Ном амжилттай хадгалагдлаа!', data: newBook });
-
     } catch (error) {
         console.error('Ном хадгалахад алдаа:', error);
         return res.status(500).json({ message: 'Дотоод серверийн алдаа' });
