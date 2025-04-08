@@ -4,6 +4,7 @@
   "main": "server.js",
   "scripts": {
     "test": "NODE_ENV=production node server",
+    "start": "node server",
     "dev": "nodemon server"
   },
   "keywords": [],
