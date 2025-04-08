@@ -9,9 +9,7 @@ const AuthorSchema = new mongoose.Schema({
         required: [true, 'Зохиолчийн овгийг оруулна уy'],
     },
     AuthorPhone: {
-        type: Number,
-        required: [false, 'Зохиолчийн утасны дугаарыг оруулна уу'],
-        
+        type: String,
     },
 })
 module.exports = mongoose.model("Authors", AuthorSchema)
