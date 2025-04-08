@@ -2,7 +2,7 @@ const Sanch = require("../models/nomiinsanch")
 const Error = require("../middleware/error")
 const asyncHandler = require("../middleware/asyncHandler")
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const validator = require("validator");
 exports.getSanchud = asyncHandler(async(req,res,next)=>{
     const sanchud = await Sanch.find()

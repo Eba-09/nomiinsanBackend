@@ -2,7 +2,7 @@ const User = require ('../models/user.js')
 const MyError = require ('../middleware/error.js')
 const asyncHandler = require ('../middleware/asyncHandler.js')
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const validator = require("validator");
 //buh hereglegcdyg harah
 exports.getUser = asyncHandler(async (req,res,next) =>{
