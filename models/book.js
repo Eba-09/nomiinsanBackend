@@ -16,8 +16,9 @@ const BookSchema = new mongoose.Schema({
         repuired: true,
     },
     isbn: {
-        type: Number,
-        required: [true, 'Номын isbn оруулна уу.'],         
+        type: String,
+        required: [true, 'Номын isbn оруулна уу.'], 
+        maxLength: [250, 'Номын нэрний урт 250 тэмдэгт байх'],        
         
     },
     rating: {

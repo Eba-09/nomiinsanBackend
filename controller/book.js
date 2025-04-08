@@ -49,48 +49,54 @@ exports.getBook = asyncHandler(async(req,res,next)=>{
     })
 })
 //1nom medeelel uusgeh
-exports.createBook = asyncHandler(async(req,res,next)=>{
-    if (!req.body || !req.file) {
-        return res.status(400).send('Фото болон мэдээллийг бүрдүүлнэ үү!');
-      }
-      const { category } = req.body;
-    const catid = await Category.findById(category);  // Ensure async await for correct handling
-    if (!catid) {
-        console.log("Category not found");
+exports.createBook = asyncHandler(async (req, res, next) => {
+    try {
+        // Зураг болон бусад өгөгдлийг шалгана
+        if (!req.file || !req.body) {
+            return res.status(400).json({ message: 'Фото болон мэдээллийг бүрдүүлнэ үү!' });
+        }
+
+        const { name, authorId, isbn, rating, price, hel, hewlesenOgnoo, too, huudas, available, bairshil, category, createUser } = req.body;
+
+        // Категори шалгах
+        const cat = await Category.findById(category);
+        if (!cat) {
+            return res.status(404).json({ message: 'Ийм ID-тай ангилал олдсонгүй' });
+        }
+
+        // Зургийн зам
+        const photoPath = `/uploads/${req.file.filename}`;
+
+        const bookData = {
+            name,
+            photo: photoPath,
+            authorId,
+            isbn,
+            rating,
+            price,
+            hel,
+            hewlesenOgnoo,
+            too,
+            huudas,
+            available,
+            bairshil,
+            category,
+            createUser
+        };
+
+        const newBook = new Book(bookData);
+        await newBook.save();
+
+        console.log('Ном амжилттай хадгалагдлаа:', newBook);
+
+        return res.status(201).json({ message: 'Ном амжилттай хадгалагдлаа!', data: newBook });
+
+    } catch (error) {
+        console.error('Ном хадгалахад алдаа:', error);
+        return res.status(500).json({ message: 'Дотоод серверийн алдаа' });
     }
-    // Бусад өгөгдлүүдийг авч байна
-    const { name, authorId, isbn, rating, price, hel, hewlesenOgnoo, too, huudas, available, bairshil,  createUser } = req.body;
-    // Зургийн замыг хадгална
-    const photoPath = `/uploads/${req.file.filename}`;
-    // Номын өгөгдлийг хадгалах (дараагийн алхам бол өгөгдлийн сан руу хадгалах)
-    const bookData = {
-        name,
-        photo: photoPath,
-        authorId,
-        isbn,
-        rating,
-        price,
-        hel,
-        hewlesenOgnoo,
-        too,
-        huudas,
-        available,
-        bairshil,
-        category,
-        createUser
-    };
-    const newBook = new Book(bookData);
-    await newBook.save()
-        .then(() => {
-            console.log('Ном амжилттай хадгалагдлаа:', bookData);
-            return res.status(200).json({ message: 'Ном амжилттай хадгалагдлаа!', data: bookData });
-        })
-        .catch((error) => {
-            console.log('Error saving book:', error);
-            return res.status(500).send('Ном хадгалахад алдаа гарлаа');
-        });
-    
-})
+});
+
 // 1 nom medeelel uurcluh
 exports.updateBook = asyncHandler(async(req,res,next)=>{
     const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
