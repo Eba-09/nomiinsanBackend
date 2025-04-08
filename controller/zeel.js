@@ -12,7 +12,6 @@ exports.getZeels = asyncHandler(async(req,res,next)=>{
         data: zeels
     })
 });
-
 exports.getZeel = asyncHandler(async(req,res,next)=>{
     const zeel = await Zeel.findById(req.params.id)
         if(!zeel){
