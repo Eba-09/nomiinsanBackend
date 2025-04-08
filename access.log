@@ -6721,3 +6721,4 @@
 ::1 - - [08/Apr/2025:02:26:14 +0000] "GET /api/lib/book/67ede798523e25dd7d0de680 HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
 ::1 - - [08/Apr/2025:02:26:56 +0000] "GET /api/lib/category/book/67f131d44f4702327dac47e8 HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
 ::1 - - [08/Apr/2025:02:26:56 +0000] "GET /api/lib/category/book/67f131d44f4702327dac47e8 HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+::1 - - [08/Apr/2025:04:17:45 +0000] "POST /api/lib/author HTTP/1.1" 200 134 "-" "PostmanRuntime/7.43.3"

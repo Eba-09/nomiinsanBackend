@@ -19,13 +19,22 @@ exports.getAuthor = asyncHandler (async(req,res,next)=>{
     })
 })
 //zohiogc nemeh
-exports.createAuthor = asyncHandler(async(req,res,next)=>{
-    const author = await Author.create(req.body)
-    res.status(200).json({
+exports.createAuthor = asyncHandler(async (req, res, next) => {
+    const { AuthorFname, AuthorLname, AuthorPhone } = req.body;
+    if (!AuthorFname || !AuthorLname || !AuthorPhone) {
+        return res.status(400).json({ success: false, message: 'Бүх талбаруудыг бөглөнө үү.' });
+    }
+    const author = await Author.create({
+        firstName: AuthorFname,
+        lastName: AuthorLname,
+        phone: AuthorPhone
+    });
+    res.status(201).json({
         success: true,
         data: author,
-    })
-})
+    });
+});
+
 //zohiogc hasah 
 exports.deleteAuthor = asyncHandler(async(req,res,next)=>{
     const author = await Author.findById(req.params.id)
