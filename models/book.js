@@ -10,6 +10,10 @@ const BookSchema = new mongoose.Schema({
         type: String,
         default: 'no-photo.jpg'
     },
+    pdf: {
+        type: String,
+        default: 'no-file.pdf'
+    },
     authorId: {
         type: mongoose.Schema.ObjectId,
         ref: 'Authors',
